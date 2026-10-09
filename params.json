@@ -1,0 +1,465 @@
+{
+ "name": "InterzoneXXL",
+ "params": [
+  {
+   "key": "glide",
+   "name": "Glide",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "vco_mod",
+   "name": "Pitch Mod",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "vco_mod_pol",
+   "name": "Pitch Mod Env Polarity",
+   "options": [
+    "Negative",
+    "Positive"
+   ],
+   "default": 1
+  },
+  {
+   "key": "vco_mod_src",
+   "name": "Pitch Mod Source",
+   "options": [
+    "LFO",
+    "Envelope"
+   ],
+   "default": 0
+  },
+  {
+   "key": "coarse_mode",
+   "name": "Coarse Mode",
+   "options": [
+    "Continuous",
+    "Semitone"
+   ],
+   "default": 0
+  },
+  {
+   "key": "octave",
+   "name": "Octave",
+   "options": [
+    "32'",
+    "16'",
+    "8'",
+    "4'",
+    "2'"
+   ],
+   "default": 2,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "coarse",
+   "name": "Coarse",
+   "min": 0.0,
+   "max": 2.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "fine",
+   "name": "Fine",
+   "min": -0.0833333,
+   "max": 0.0833333,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "width",
+   "name": "Pulse Width",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "pwm",
+   "name": "PWM Depth",
+   "min": 0.0,
+   "max": 0.5,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "pwm_pol",
+   "name": "PWM Env Polarity",
+   "options": [
+    "Negative",
+    "Positive"
+   ],
+   "default": 0
+  },
+  {
+   "key": "pwm_src",
+   "name": "PWM Source",
+   "options": [
+    "External",
+    "LFO",
+    "Envelope"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "sub_oct",
+   "name": "Sub Octave",
+   "options": [
+    "-2 oct",
+    "-1 oct",
+    "-4th",
+    "0",
+    "+5th",
+    "+1 oct",
+    "+2 oct"
+   ],
+   "default": 3,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "saw",
+   "name": "Saw Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.8,
+   "dynamic_display": true
+  },
+  {
+   "key": "pulse",
+   "name": "Pulse Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sub",
+   "name": "Sub Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "noise",
+   "name": "Noise Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "ext",
+   "name": "Ext Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sub_wave",
+   "name": "Sub Wave",
+   "options": [
+    "Pulse",
+    "Square",
+    "Saw"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "noise_type",
+   "name": "Noise Type",
+   "options": [
+    "White",
+    "Pink"
+   ],
+   "default": 0
+  },
+  {
+   "key": "cutoff",
+   "name": "Filter Freq",
+   "min": 0.0,
+   "max": 10.0,
+   "default": 10.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "res",
+   "name": "Filter Res",
+   "min": 0.0,
+   "max": 10.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "hpf",
+   "name": "HPF Freq",
+   "min": 0.0,
+   "max": 10.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "poles",
+   "name": "Filter Poles",
+   "options": [
+    "2 Pole",
+    "4 Pole"
+   ],
+   "default": 1
+  },
+  {
+   "key": "flt_env",
+   "name": "Filter Env",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "flt_lfo",
+   "name": "Filter LFO",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "flt_voct",
+   "name": "Filter V/Oct",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "flt_env_pol",
+   "name": "Filter Env Polarity",
+   "options": [
+    "Negative",
+    "Positive"
+   ],
+   "default": 1
+  },
+  {
+   "key": "flt_cv1",
+   "name": "Filter CV 1",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "flt_cv2",
+   "name": "Filter CV 2",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo_rate",
+   "name": "LFO Rate",
+   "min": 0.0,
+   "max": 11.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo_fine",
+   "name": "LFO Fine",
+   "min": -0.5,
+   "max": 0.5,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo_slew",
+   "name": "LFO Slew",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo_wave",
+   "name": "LFO Wave",
+   "options": [
+    "Sine",
+    "Triangle",
+    "Saw Up",
+    "Saw Down",
+    "Square",
+    "S+H",
+    "Noise"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "attack",
+   "name": "Attack",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "decay",
+   "name": "Decay",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sustain",
+   "name": "Sustain",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "release",
+   "name": "Release",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "env_length",
+   "name": "Env Length",
+   "options": [
+    "Short",
+    "Long"
+   ],
+   "default": 0
+  },
+  {
+   "key": "env_cycle",
+   "name": "Env Cycle",
+   "options": [
+    "Gate",
+    "Cycle"
+   ],
+   "default": 0
+  },
+  {
+   "key": "env_manual",
+   "name": "Manual Gate",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "vca_src",
+   "name": "VCA Source",
+   "options": [
+    "Envelope",
+    "Gate"
+   ],
+   "default": 0
+  },
+  {
+   "key": "vca_cv",
+   "name": "VCA Level CV",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "voice_mode",
+   "name": "Voice Mode",
+   "options": [
+    "Mono",
+    "Poly"
+   ],
+   "default": 0
+  },
+  {
+   "key": "voices",
+   "name": "Poly Voices",
+   "min": 1,
+   "max": 16,
+   "default": 8,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "mono_trig",
+   "name": "Mono Retrigger",
+   "options": [
+    "Legato",
+    "Retrigger"
+   ],
+   "default": 0
+  },
+  {
+   "key": "bend",
+   "name": "Bend Range",
+   "min": 0,
+   "max": 24,
+   "default": 2,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "level",
+   "name": "Level",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "lim_drive",
+   "name": "Limiter Drive",
+   "min": 0.0,
+   "max": 18.0,
+   "default": 0.0,
+   "dynamic_display": true,
+   "unit": "dB"
+  },
+  {
+   "key": "lim_ceiling",
+   "name": "Ceiling",
+   "min": -12.0,
+   "max": 0.0,
+   "default": -0.3,
+   "dynamic_display": true,
+   "unit": "dB"
+  },
+  {
+   "key": "lim_release",
+   "name": "Limiter Release",
+   "min": 10.0,
+   "max": 500.0,
+   "default": 80.0,
+   "dynamic_display": true,
+   "unit": "ms"
+  },
+  {
+   "key": "panic",
+   "name": "Panic",
+   "min": 0.0,
+   "max": 1.0,
+   "momentary": true,
+   "type": "trigger",
+   "default": 0.0
+  }
+ ]
+}

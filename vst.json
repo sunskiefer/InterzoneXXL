@@ -1,0 +1,36 @@
+{
+  "name": "InterzoneXXL",
+  "vendor": "ANDREALPHEUS",
+  "uid": "AnIz",
+  "version": 1000,
+  "so": "interzonexxl.so",
+  "params": "params.json",
+  "build": {
+    "root": ".",
+    "sources": [
+      "src/engine.cc",
+      "third_party/valley/src/dsp/filters/VecOnePoleFilters.cpp",
+      "third_party/valley/src/dsp/filters/VecOTAFilter.cpp",
+      "third_party/valley/src/dsp/filters/OnePoleFilters.cpp",
+      "third_party/valley/src/dsp/modulation/VecLoopingADSR.cpp"
+    ],
+    "cflags": [
+      "-Isrc",
+      "-Isrc/shim",
+      "-Ithird_party/valley/src",
+      "-Ithird_party/rack/include",
+      "-Ithird_party/simde"
+    ],
+    "libs": [
+      "-lm",
+      "-ldl",
+      "-lpthread"
+    ]
+  },
+  "layout": "layout.conf",
+  "title_font": "art/fonts/TitilliumWeb-SemiBold.ttf",
+  "defines": {
+    "HAS_DISPLAY_REV": 1,
+    "SAMPLE_ACCURATE": 1
+  }
+}
