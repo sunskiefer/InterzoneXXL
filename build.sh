@@ -15,8 +15,10 @@ mkdir -p build/host build/arm
 [ -x build/host/shadow_art ] || gcc -O2 -w -I"$MPC_VST/tools/vendor/force-shadow/tools" -x c -o build/host/shadow_art "$MPC_VST/tools/shadow_art.c" -lm
 rm -rf build/skin
 SHADOW_TITLE_FONT="$PWD/art/fonts/TitilliumWeb-SemiBold.ttf" SHADOW_ART="$PWD/build/host/shadow_art" python3 "$MPC_VST/tools/gen_vst.py" vst.json
+python3 tools/knob_art.py "build/skin/$NAME/Plugin Skins"   # the source pages' knobs: Valley, Bogaudio, VCV Rogan (PlateauXXL)
+python3 tools/post_skin.py "build/skin/$NAME/Plugin Skins" layout.conf   # those pages in their modules' colours (PlateauXXL)
 python3 tools/panel_art.py "build/skin/$NAME/Plugin Skins"   # Interzone's panel, sliders, knobs and switches
-python3 "$MPC_VST/tools/skin_check.py" "build/skin/$NAME/Plugin Skins"   # touch boxes, edges, Q-Links, as MPC loads it
+python3 tools/check_skin.py "build/skin/$NAME/Plugin Skins"   # touch boxes, edges, Q-Links, as MPC loads it
 SRCS=$(python3 -c "import json; print(' '.join(json.load(open('vst.json'))['build']['sources']))")
 CFLAGS=$(python3 -c "import json; print(' '.join(json.load(open('vst.json'))['build']['cflags']))")
 TGT="-target arm-linux-gnueabihf.2.31 -mcpu=generic+v7a+vfp3d16-d32-neon+thumb2 -ffp-contract=off"

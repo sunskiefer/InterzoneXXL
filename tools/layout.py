@@ -14,6 +14,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import panel  # noqa: E402
+import source_pages  # noqa: E402
 
 ROOT = panel.ROOT
 LAYOUT = os.path.join(ROOT, "layout.conf")
@@ -45,27 +46,86 @@ theme_lcd=1c1c1c
 theme_box=1c1c1c
 """
 
-# VOICE: the MIDI voice and the output stage (not on the module). Section boxes and titles are drawn by
-# tools/panel_art.py in the panel's style (VOICE_DECOR).
+# VOICE: the MIDI voice and the output stage (VOICE), the Ext Osc (EXT OSC) and the user presets (PRESETS), three
+# Q-Link sub-pages of one tab. Frames, titles and texts are drawn by tools/post_skin.py (PlateauXXL's), the knobs by
+# tools/knob_art.py and tools/panel_art.py (Valley's orange Rogan, r=44).
 VOICE = """
 [tab VOICE]
-enum_h cx=175 cy=300 sw=150 sh=60 label="" key=voice_mode
-knob cx=470 cy=300 r=44 label="POLY VOICES" key=voices
-enum_h cx=175 cy=520 sw=150 sh=60 label="" key=mono_trig
-knob cx=470 cy=520 r=44 label="BEND RANGE" key=bend
-knob cx=755 cy=300 r=44 label="LEVEL" key=level
-knob cx=920 cy=300 r=44 label="DRIVE" key=lim_drive
-knob cx=1085 cy=300 r=44 label="CEILING" key=lim_ceiling
-knob cx=755 cy=520 r=44 label="RELEASE" key=lim_release
-button cx=1003 cy=520 label="PANIC" key=panic color=d23a2a
-qlinks "VOICE" = voice_mode,voices,mono_trig,bend,level,lim_drive,lim_ceiling,lim_release,panic
+#@panel tab={t} color=282828 ink=ffffff
+frame x=0 y=86 w=1280 h=628 title="" banks="VOICE"
+frame x=0 y=86 w=1280 h=628 title="" banks="EXT OSC"
+frame x=0 y=86 w=1280 h=628 title="" banks="PRESETS"
+#@text tab={t} cx=1252 cy=114 size=30 align=right label="InterzoneXXL"
+frame x=10 y=140 w=620 h=568 title="" banks="VOICE"
+frame x=650 y=140 w=620 h=568 title="" banks="VOICE"
+#@title tab={t} x=10 y=140 label="VOICE" banks="VOICE"
+#@title tab={t} x=650 y=140 label="OUTPUT  /  LIMITER" banks="VOICE"
+#@text tab={t} cx=175 cy=250 size=20 label="MODE" banks="VOICE"
+#@text tab={t} cx=175 cy=470 size=20 label="MONO NOTES" banks="VOICE"
+#@text tab={t} cx=1100 cy=585 size=16 color=8a8a8a label="all to default, all notes off" banks="VOICE"
+enum_h cx=175 cy=310 sw=150 sh=60 label="" key=voice_mode banks="VOICE"
+knob cx=470 cy=310 r=44 label="POLY VOICES" key=voices banks="VOICE"
+enum_h cx=175 cy=530 sw=150 sh=60 label="" key=mono_trig banks="VOICE"
+knob cx=470 cy=530 r=44 label="BEND RANGE" key=bend banks="VOICE"
+knob cx=760 cy=310 r=44 label="LEVEL" key=level banks="VOICE"
+knob cx=930 cy=310 r=44 label="DRIVE" key=lim_drive banks="VOICE"
+knob cx=1100 cy=310 r=44 label="CEILING" key=lim_ceiling banks="VOICE"
+knob cx=760 cy=530 r=44 label="RELEASE" key=lim_release banks="VOICE"
+button cx=1100 cy=530 label="PANIC" key=panic color=d23a2a banks="VOICE"
+qlinks "VOICE" = voice_mode,voices,level,lim_drive,lim_ceiling,mono_trig,bend,lim_release,panic
+frame x=10 y=140 w=1260 h=568 title="" banks="EXT OSC"
+#@title tab={t} x=10 y=140 label="EXT OSC  -  one oscillator per voice, following the played note (with Glide)" banks="EXT OSC"
+#@text tab={t} cx=320 cy=250 size=20 label="WAVE" banks="EXT OSC"
+#@text tab={t} cx=320 cy=440 size=20 label="OCTAVE" banks="EXT OSC"
+#@text tab={t} cx=640 cy=650 size=17 color=8a8a8a label="Source EXT OSC (+-5 V) for any input on CV IN; it feeds Mixer Ext by default: raise the Ext slider on MIXER / ENV." banks="EXT OSC"
+enum_h cx=320 cy=310 sw=110 sh=60 label="" key=xo_wave options="SAW,SQUARE,TRI,SINE,NOISE" banks="EXT OSC"
+enum_h cx=320 cy=500 sw=90 sh=60 label="" key=xo_oct options="-3,-2,-1,0,+1,+2" banks="EXT OSC"
+knob cx=900 cy=330 r=44 label="TUNE" key=xo_tune banks="EXT OSC"
+knob cx=1100 cy=330 r=44 label="WIDTH" key=xo_pw banks="EXT OSC"
+qlinks "EXT OSC" = xo_wave,xo_tune,xo_pw,xo_oct
+frame x=10 y=140 w=1260 h=568 title="" banks="PRESETS"
+#@title tab={t} x=10 y=140 label="PRESETS" banks="PRESETS"
+#@text tab={t} cx=640 cy=226 size=18 label="SLOT" banks="PRESETS"
+enum_h cx=640 cy=320 sw=140 sh=60 rows=2 label="" key=preset_slot options="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16" banks="PRESETS"
+button cx=300 cy=510 label="SAVE" key=preset_save banks="PRESETS"
+button cx=500 cy=510 label="LOAD" key=preset_load banks="PRESETS"
+readout cx=900 cy=510 w=480 h=56 label="" key=preset_info banks="PRESETS"
+#@text tab={t} cx=640 cy=650 size=17 color=8a8a8a label="Pick a slot, then SAVE or LOAD. SAVE overwrites the slot. Files: /sdcard/InterzoneXXL Presets" banks="PRESETS"
+qlinks "PRESETS" = preset_slot,preset_save,preset_load
 """
-# (x, y, w, h, title) in Force coordinates, and text lines (cx, cy, size, text)
-VOICE_DECOR = {
-    "boxes": [(20, 160, 600, 540, "VOICE"), (640, 160, 620, 540, "OUTPUT")],
-    "texts": [(175, 245, 22, "MODE"), (175, 465, 22, "MONO NOTES"), (1003, 580, 18, "all to default, all notes off"),
-              (1260, 112, 26, "InterzoneXXL")],
-}
+
+# CV IN: each of the module's input jacks has its amount (above) and picks a source (below; the open list drops
+# below the fields, clear of the knobs): the module's own blue
+# attenuverters for Freq 1 / 2 (r=38) and its orange one for VCA Level, an orange amount knob (r=35) for the others.
+CV_IN_1 = [("voct2", "VOCT 2", "voct2_cv", 35), ("pwm_in", "PWM", "pwm_in_cv", 35), ("ext_in", "MIXER EXT", "ext_in_cv", 35),
+           ("cut1", "FREQ 1", "flt_cv1", 38), ("cut2", "FREQ 2", "flt_cv2", 38), ("res_in", "RES", "res_in_cv", 35),
+           ("vca_in", "VCA LEVEL", "vca_cv", 35), ("lrate", "LFO RATE", "lrate_cv", 35)]
+CV_IN_2 = [("ltrig", "LFO TRIG"), ("lreset", "LFO RESET"), ("egate", "ENV GATE"), ("etrig", "ENV TRIG")]
+
+
+def cv_in_page(t):
+    out = ["", "[tab CV IN]", "#@panel tab=%d color=282828 ink=ffffff" % t,
+           'frame x=0 y=86 w=1280 h=628 title="" banks="CV 1"', 'frame x=0 y=86 w=1280 h=628 title="" banks="CV 2"',
+           '#@title tab=%d x=10 y=92 label="CV IN  -  a source for every input jack of the module, and its amount"' % t,
+           "#@line tab=%d x1=28 y1=134 x2=1252 y2=134 color=ffffff width=1" % t]
+    for i, (key, label, amount, r) in enumerate(CV_IN_1):
+        cx = 82 + 156 * i
+        out += ['knob cx=%d cy=250 r=%d label="AMOUNT" key=%s banks="CV 1"' % (cx, r, amount),
+                'popup cx=%d cy=400 w=146 h=48 label="" key=%s_src cols=6 banks="CV 1"' % (cx, key),
+                '#@text tab=%d cx=%d cy=176 size=20 label="%s" banks="CV 1"' % (t, cx, label)]
+    for i, (key, label) in enumerate(CV_IN_2):
+        cx = 82 + 156 * i
+        out += ['popup cx=%d cy=400 w=146 h=48 label="" key=%s_src cols=6 banks="CV 2"' % (cx, key),
+                '#@text tab=%d cx=%d cy=176 size=20 label="%s" banks="CV 2"' % (t, cx, label)]
+    out += ['#@text tab=%d cx=640 cy=560 size=17 color=8a8a8a label="Freq 1 / 2 and VCA Level: the module\'s own '
+            'attenuverters. Gates (Trig, Reset, Env Gate, Env Trig): high above 1 V, added to the MIDI gate." '
+            'banks="CV 1|CV 2"' % t,
+            '#@text tab=%d cx=640 cy=600 size=17 color=8a8a8a label="Sources: LFO 1-4, Tidal 1-4, Random X1-X3 / Y / '
+            'T1-T3, Seq 1-2, Gate 1-2, Ext Osc, Interzone\'s own jacks (IZ), Env +/-, VCO Saw / Pulse / Sub, Velocity, '
+            'Mod Wheel, Pressure" banks="CV 1|CV 2"' % t,
+            'qlinks "CV 1" = ' + ",".join([a for _, _, a, _ in CV_IN_1] + [k + "_src" for k, _, _, _ in CV_IN_1]),
+            'qlinks "CV 2" = ' + ",".join(k + "_src" for k, _ in CV_IN_2)]
+    return "\n".join(out)
 
 
 def knob_r(box):
@@ -90,7 +150,11 @@ def build():
             else:
                 lines.append('toggle cx=%d cy=%d label="" key=%s ns=0 bw=%d' % (cx, cy, c["key"], w))
         lines.append('qlinks "%s" = %s' % (tab, ",".join(panel.QLINKS[tab])))
-    lines.append(VOICE.rstrip("\n"))
+    t = len(panel.PAGES)
+    lines.append(VOICE.rstrip("\n").replace("{t}", str(t)))
+    lines.append(cv_in_page(t + 1))
+    for i, page in enumerate((source_pages.LFO, source_pages.TIDAL_RANDOM, source_pages.SEQ)):
+        lines.append(page.replace("{t}", str(t + 2 + i)))
     lines.append("qlinks_track = " + ",".join(panel.QLINKS[panel.PAGES[0]["tab"]]))
     return "\n".join(lines) + "\n"
 
@@ -121,7 +185,7 @@ def main():
     have = open(LAYOUT).read() if os.path.exists(LAYOUT) else ""
     if have != text:
         sys.exit("layout: layout.conf is out of date: run tools/layout.py --write")
-    print("layout: layout.conf up to date (%d pages)" % (len(panel.PAGES) + 1))
+    print("layout: layout.conf up to date")
 
 
 if __name__ == "__main__":

@@ -12,8 +12,7 @@ For the Interzone pages (tools/panel.py):
     switches, and the Man. button with its red light;
   - the control's definition in TUI.json is replaced by one of its own: those images, the widget's exact bounds, and
     its live value text above it (sliders and small knobs; switches and detent knobs show their value on the panel).
-On the VOICE page it redraws the knob filmstrips with Valley's orange Rogan knob and draws the section boxes and titles
-in the panel's style. Images the new definitions no longer use are deleted. Needs cairosvg and Pillow.
+On the VOICE tab it redraws the knob filmstrip (r=44) with Valley's orange Rogan knob and draws the Panic button. Images the new definitions no longer use are deleted. Needs cairosvg and Pillow.
 
 Filmstrips follow mpc-vst-plugins' device-checked layouts (docs/NOTES.md): a knob is 128 square frames with
 numFrames 127; a slider is frames of its own w x h, numFrames = their count, at most 12288 px tall. A switch, the
@@ -319,11 +318,12 @@ def rewrite_tui(skin, controls, params_order):
 
 
 def check_overlaps(tui):
-    """No two controls of a page share touch area (MPC gives a touch to one of them only)."""
+    """No two of the Interzone controls of a page share touch area (MPC gives a touch to one of them only)."""
     defs = defs_by_key(tui)
     bad = []
     for tab in tui["pageData"]["tabs"]:
-        kids = [c for c in defs[tab["componentName"]]["value"]["componentsData"] if child_param(c) is not None]
+        kids = [c for c in defs[tab["componentName"]]["value"]["componentsData"]
+                if child_param(c) is not None and c["componentData"]["type"].startswith("iz_")]
         rects = [(c["componentData"]["name"] or str(child_param(c)), [int(v) for v in c["bounds"]["bounds"].split()])
                  for c in kids]
         for i in range(len(rects)):
@@ -346,13 +346,16 @@ def prune_images(skin, tui):
 
 
 # ------------------------------------------------------------------------------------------------ VOICE page
+VOICE_RADIUS = 44   # layout.py: the VOICE tab's knobs
+
+
 def voice_knobs(skin):
-    """The VOICE page's knob filmstrips: Valley's orange Rogan, as on the module (128 square frames)."""
+    """The VOICE tab's knob filmstrips (r=44): Valley's orange Rogan, as on the module (128 square frames)."""
     bg, knob, fg, _ = panel.KNOB["med_orange"]
     n = 0
     for name in sorted(os.listdir(skin)):
         m = re.match(r"sh_knob_r(\d+)\.png$", name)
-        if not m:
+        if not m or int(m.group(1)) != VOICE_RADIUS:
             continue
         path = os.path.join(skin, name)
         frame = Image.open(path).size[0]
@@ -386,7 +389,7 @@ def section_box(d, x, y, w, h, title, font):
     d.text((x + w / 2, y), title, font=font, fill=(30, 30, 30), anchor="mm")
 
 
-PANIC_BOX = (1003 - 85, 520 - 32 - panel.Y_OFF, 170, 64)   # the VOICE page's Panic button (layout.py)
+PANIC_BOX = (1100 - 85, 530 - 32 - panel.Y_OFF, 170, 64)   # the VOICE page's Panic button (layout.py)
 
 
 def voice_panic(skin, tui):
@@ -415,21 +418,6 @@ def voice_panic(skin, tui):
             if child["componentData"]["type"] == found:
                 set_bounds(child, x, y, w, h)
     json.dump(tui, open(os.path.join(skin, "TUI.json"), "w"), indent=1)
-
-
-def voice_background(skin, tab_index):
-    path = os.path.join(skin, "sh_bg_%d.png" % tab_index)
-    img = Image.open(path).convert("RGB")
-    d = ImageDraw.Draw(img)
-    title = ImageFont.truetype(FONT, 34)
-    for x, y, w, h, t in layout.VOICE_DECOR["boxes"]:
-        section_box(d, x, y - panel.Y_OFF, w, h - 16, t, title)
-    for cx, cy, size, text in layout.VOICE_DECOR["texts"]:
-        f = ImageFont.truetype(FONT, size)
-        anchor = "rm" if text == "InterzoneXXL" else "mm"
-        d.text((cx, cy - panel.Y_OFF), text, font=f, fill=(255, 255, 255) if size >= 22 else (190, 190, 190),
-               anchor=anchor)
-    img.save(path, optimize=True)
 
 
 # ------------------------------------------------------------------------------------------------ main
@@ -480,7 +468,6 @@ def main():
         bg.save(os.path.join(skin, "sh_bg_%d.png" % tab_index), optimize=True)
     tui = rewrite_tui(skin, controls, order)
     n_knobs = voice_knobs(skin)
-    voice_background(skin, tabs.index("VOICE"))
     voice_panic(skin, tui)
     check_overlaps(tui)
     removed = prune_images(skin, tui)
