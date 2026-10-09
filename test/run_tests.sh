@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Offline tests (x86, ASan + UBSan): the framework's host test, then test/interzone_test.cc on the engine, which also
-# runs Valley's own Interzone module code (test/make_ref.py) as the reference.
+# Offline tests (x86, ASan + UBSan): the framework's host test, test/sources_test.cc on the modulation sources
+# (PlateauXXL's), then test/interzone_test.cc on the engine, which also runs Valley's own Interzone module code
+# (test/make_ref.py) as the reference.
 #   test/run_tests.sh              (MPC_VST=../mpc-vst-plugins to use another framework checkout)
 #   test/run_tests.sh --wav DIR    also write the renders to listen to
 set -euo pipefail
@@ -23,4 +24,10 @@ for f in $SRCS third_party/valley/src/dsp/filters/OTAFilter.cpp build/dsptest/in
   OBJS="$OBJS $o"
 done
 g++ $SAN $OBJS -lm -ldl -lpthread -o build/dsptest/interzone_test
+o="build/dsptest/test_sources_test.cc.o"
+g++ $SAN -std=gnu++11 -Wall -Wno-unused-function -Wno-unused-variable -Itest $CFLAGS -Ibuild -I"$MPC_VST/wrapper" \
+  -c test/sources_test.cc -o "$o"
+g++ $SAN $(echo $OBJS | tr ' ' '\n' | grep -v -E "interzone_test|interzone_ref|OTAFilter.cpp" | grep -v engine.cc) "$o" \
+  -lm -ldl -lpthread -o build/dsptest/sources_test
+build/dsptest/sources_test
 build/dsptest/interzone_test "$@"

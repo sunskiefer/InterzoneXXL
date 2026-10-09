@@ -11,8 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <string>
+#include <functional>
 #include <vector>
 
 #include "limiter.h"
@@ -58,7 +60,7 @@ const int VCA_OUTPUT = 5;
 struct Plug {
   const mpc_engine_t* e;
   void* inst;
-  Plug() : e(mpc_engine()), inst(e->create(NULL)) {}
+  explicit Plug(const char* dir = "build/dsptest/presets") : e(mpc_engine()), inst(e->create(dir)) {}
   ~Plug() { e->destroy(inst); }
   void Set(const char* k, double v) {
     char b[32];
@@ -175,7 +177,9 @@ struct RefSetting {
 // Compare the plugin (Level 1, so its output is the summed VCA volts / 10) with the module over `frames` frames.
 // Mono: one MIDI-CV channel with last-note priority; poly: channel = the voice the plugin chose (read back).
 float CompareWithModule(const char* name, const std::vector<RefSetting>& settings, const std::vector<Event>& events,
-                        int frames, bool poly, int voices, bool retrig = false) {
+                        int frames, bool poly, int voices, bool retrig = false,
+                        const std::vector<std::pair<const char*, double> >& patch = {},
+                        std::function<void(long, void*)> ref_extra = nullptr) {
   Plug p;
   void* m = ref_create();
   p.Set("level", 1.0);
@@ -185,6 +189,8 @@ float CompareWithModule(const char* name, const std::vector<RefSetting>& setting
     p.Set("voices", voices);
   }
   if (retrig) p.Set("mono_trig", 1);
+  for (const auto& kv : patch) p.Set(kv.first, kv.second);
+  long total = 0;   // frames since both were created (the plugin's tempo clock counts from creation)
   for (const RefSetting& s : settings) {
     p.Set(s.key, s.value);
     ref_param(m, s.ref_id, static_cast<float>(s.ref_value));
@@ -202,6 +208,8 @@ float CompareWithModule(const char* name, const std::vector<RefSetting>& setting
     ref_input(m, VOCT_INPUT_1, channels, voct);
     ref_input(m, GATE_INPUT, channels, gate);
     ref_input(m, TRIG_INPUT, channels, trig);
+    if (ref_extra) ref_extra(total, m);
+    ++total;
     ref_process(m);
     p.e->render(p.inst, o.data(), 1);
   }
@@ -237,6 +245,8 @@ float CompareWithModule(const char* name, const std::vector<RefSetting>& setting
     ref_input(m, VOCT_INPUT_1, channels, voct);
     ref_input(m, GATE_INPUT, channels, gate);
     ref_input(m, TRIG_INPUT, channels, trig);
+    if (ref_extra) ref_extra(total, m);
+    ++total;
     ref_process(m);
     for (int c = 0; c < 16; ++c)
       if (trig_left[c] > 0 && --trig_left[c] == 0) trig[c] = 0;
@@ -520,6 +530,162 @@ void TestDisplay() {
   Check(p.Get("octave") == "2", "Octave default 8'");
 }
 
+// ------------------------------------------------------------------------------------------------ patching
+enum { SRC_SEQ1 = 16, SRC_GATE1 = 18, SRC_LFO1 = 1, SRC_EXT_OSC = 20, SRC_ENV_POS = 28, SRC_VCO_SUB = 32,
+       SRC_VELOCITY = 33 };
+
+void TestPatchingAgainstModule() {
+  const int S = kRate / 4;
+  // Seq 1 at +1 V on every step into VOct 2: the module with 1 V on its V/Oct 2 jack
+  std::vector<std::pair<const char*, double> > seq;
+  for (int i = 1; i <= 16; ++i) {
+    static char keys[16][16];
+    snprintf(keys[i - 1], sizeof keys[0], "sq1_s%d", i);
+    seq.push_back(std::make_pair(keys[i - 1], 1.0));
+  }
+  seq.push_back(std::make_pair("voct2_src", (double)SRC_SEQ1));
+  CompareWithModule("ref-patch-seq-into-voct2", {}, {{0, 1, 55}, {2 * S, 0, 55}}, 3 * S, false, 1, false, seq,
+                    [](long, void* m) {
+                      float one[16] = { 1.0f };
+                      ref_input(m, VOCT_INPUT_2, 1, one);
+                    });
+  // Gate 1 (steps 1, 3, 5... on, 1/16 at 120 BPM, width 50 %) into Env Gate, no MIDI: the module's Gate jack
+  std::vector<std::pair<const char*, double> > gates;
+  for (int i = 1; i <= 16; ++i) {
+    static char keys[16][16];
+    snprintf(keys[i - 1], sizeof keys[0], "gt1_g%d", i);
+    if (i % 2) gates.push_back(std::make_pair(keys[i - 1], 1.0));   // a switch set to its own value flips (a tap)
+  }
+  gates.push_back(std::make_pair("egate_src", (double)SRC_GATE1));
+  CompareWithModule("ref-patch-gate-seq-plays-the-voice",
+                    {{"release", 0.3, ENV_RELEASE_PARAM, 0.3}, {"decay", 0.4, ENV_DECAY_PARAM, 0.4},
+                     {"sustain", 0.4, ENV_SUSTAIN_PARAM, 0.4}},
+                    {}, 4 * S, false, 1, false, gates,
+                    [](long t, void* m) {
+                      double pos = t * (120.0 / 60.0 / kRate) / 0.25;   // sixteenths since creation
+                      long step = static_cast<long>(floor(pos)) % 16;
+                      float g[16] = { (step % 2 == 0 && pos - floor(pos) < 0.5) ? 10.0f : 0.0f };
+                      ref_input(m, GATE_INPUT, 1, g);
+                    });
+}
+
+void TestPatching() {
+  {   // the Ext Osc through Mixer Ext: a square an octave below the note
+    Plug p;
+    p.Set("saw", 0.0);
+    p.Set("ext", 1.0);
+    p.Set("cutoff", 6.0);
+    std::vector<float> out;
+    p.On(69);   // A4 = 440 Hz; Ext Osc at -1 octave = 220 Hz
+    p.Run(kRate / 2, &out);
+    float hz = Pitch(out, kRate / 4, kRate / 2);
+    char what[96];
+    snprintf(what, sizeof what, "Ext Osc into Mixer Ext: a square an octave down (%.1f Hz)", hz);
+    Check(Rms(out, kRate / 4, kRate / 2) > 0.03f && fabsf(hz - 220.0f) < 1.0f, what);
+    p.Set("xo_oct", 3);   // "0"
+    out.clear();
+    p.Run(kRate / 2, &out);
+    hz = Pitch(out, kRate / 4, kRate / 2);
+    snprintf(what, sizeof what, "Ext Osc octave 0 follows the note (%.1f Hz)", hz);
+    Check(fabsf(hz - 440.0f) < 2.0f, what);
+    for (int w = 0; w < 5; ++w) {
+      p.Set("xo_wave", w);
+      out.clear();
+      p.Run(kRate / 8, &out);
+      Check(Finite(out) && Rms(out, 0, out.size()) > 0.01f, "Ext Osc waves sound");
+    }
+  }
+  {   // LFO 1 into Freq 1 with the blue attenuverter up: the brightness moves
+    Plug a, b;
+    for (Plug* p : {&a, &b}) {
+      p->Set("cutoff", 4.0);
+      p->Set("res", 3.0);
+      p->Set("lfo1_sync", 0);       // free
+      p->Set("lfo1_freq", 2.0);     // a few Hz
+      p->Set("cut1_src", SRC_LFO1);
+      p->On(48);
+    }
+    b.Set("flt_cv1", 1.0);
+    std::vector<float> x, y;
+    a.Run(kRate, &x);
+    b.Run(kRate, &y);
+    const size_t win = 1011;   // three periods of note 48 (130.8 Hz)
+    float lo = 1e9f, hi = 0;
+    for (size_t i = kRate / 4; i + win < y.size(); i += win) {
+      float r = Rms(y, i, i + win);
+      lo = fminf(lo, r);
+      hi = fmaxf(hi, r);
+    }
+    float alo = 1e9f, ahi = 0;
+    for (size_t i = kRate / 4; i + win < x.size(); i += win) {
+      float r = Rms(x, i, i + win);
+      alo = fminf(alo, r);
+      ahi = fmaxf(ahi, r);
+    }
+    char what[128];
+    snprintf(what, sizeof what, "LFO 1 into Freq 1 moves the filter only with the attenuverter up (%.3f-%.3f vs %.3f-%.3f)",
+             lo, hi, alo, ahi);
+    Check(hi > lo * 1.5f && ahi < alo * 1.1f, what);
+  }
+  {   // per-voice sources in Poly: the envelope into PWM, the sub into Freq 2 (FM), velocity into VCA Level
+    Plug p;
+    p.Set("voice_mode", 1);
+    p.Set("voices", 8);
+    p.Set("pulse", 0.8);
+    p.Set("pwm_src", 0);   // the PWM jack
+    p.Set("pwm", 0.4);
+    p.Set("pwm_in_src", SRC_ENV_POS);
+    p.Set("cut2_src", SRC_VCO_SUB);
+    p.Set("flt_cv2", 0.5);
+    p.Set("vca_src", 1);
+    p.Set("vca_in_src", SRC_VELOCITY);
+    p.Set("vca_cv", -0.5);
+    std::vector<float> out;
+    for (int n = 0; n < 8; ++n) p.Midi(0x90, 50 + 3 * n, 20 + 13 * n);
+    p.Run(kRate / 2, &out);
+    Check(Finite(out) && Rms(out, 0, out.size()) > 0.01f, "Poly with per-voice sources patched: sound, finite");
+  }
+  {   // MIDI sources: velocity sets the VCA level per voice
+    Plug p;
+    p.Set("vca_in_src", SRC_VELOCITY);
+    p.Set("vca_cv", -1.0);   // level = envelope - velocity / 10: a soft note is louder
+    std::vector<float> soft, hard;
+    p.Midi(0x90, 60, 20);
+    p.Run(kRate / 4, &soft);
+    p.Off(60);
+    p.Run(kRate / 4, NULL);
+    p.Midi(0x90, 60, 120);
+    p.Run(kRate / 4, &hard);
+    Check(Rms(soft, kRate / 8, kRate / 4) > 2.0f * Rms(hard, kRate / 8, kRate / 4),
+          "Velocity into VCA Level (attenuverter down): soft notes louder than hard ones");
+  }
+}
+
+void TestPresets() {
+  system("rm -rf build/dsptest/presets");
+  Plug p;
+  p.Set("cutoff", 2.5);
+  p.Set("voct2_src", SRC_SEQ1);
+  p.Set("preset_slot", 4);
+  p.Set("preset_save", 1.0);
+  for (int i = 0; i < 50 && p.Text("preset_info").find("SAVED") == std::string::npos; ++i) {
+    usleep(20000);
+    p.Run(128, NULL);
+  }
+  Check(p.Text("preset_info") == "PRESET 5: SAVED", "preset save writes the slot");
+  p.Set("panic", 1.0);
+  p.Run(128, NULL);
+  Check(p.Get("cutoff") == "10" && p.Get("voct2_src") == "0" && p.Get("preset_slot") == "4",
+        "Panic: defaults, the preset slot kept");
+  p.Run(kRate / 2, NULL);   // past the trigger's gesture window
+  p.Set("preset_load", 1.0);
+  for (int i = 0; i < 50 && p.Get("cutoff") != "2.5"; ++i) {
+    usleep(20000);
+    p.Run(128, NULL);
+  }
+  Check(p.Get("cutoff") == "2.5" && p.Get("voct2_src") == std::to_string(SRC_SEQ1), "preset load restores it");
+}
+
 void TestLimiterMatchesRmxxxl() {
   // src/limiter.h computes the window minimum faster than RMXXXL's scan; the output must be the same.
   ixxl::Limiter a;
@@ -557,6 +723,9 @@ int main(int argc, char** argv) {
   TestPanicAndState();
   TestDisplay();
   TestLimiterMatchesRmxxxl();
+  TestPatchingAgainstModule();
+  TestPatching();
+  TestPresets();
   printf("%s (%d failed)\n", failures ? "FAILED" : "PASSED", failures);
   return failures ? 1 : 0;
 }

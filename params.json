@@ -460,6 +460,2043 @@
    "momentary": true,
    "type": "trigger",
    "default": 0.0
+  },
+  {
+   "key": "voct2_src",
+   "name": "VOct 2 Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "voct2_cv",
+   "name": "VOct 2 Amount",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "pwm_in_src",
+   "name": "PWM Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "pwm_in_cv",
+   "name": "PWM Amount",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "ext_in_src",
+   "name": "Mixer Ext Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 20,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "ext_in_cv",
+   "name": "Mixer Ext Amount",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "cut1_src",
+   "name": "Freq 1 Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "cut2_src",
+   "name": "Freq 2 Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "res_in_src",
+   "name": "Res Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "res_in_cv",
+   "name": "Res Amount",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "vca_in_src",
+   "name": "VCA Level Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lrate_src",
+   "name": "LFO Rate Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lrate_cv",
+   "name": "LFO Rate Amount",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "ltrig_src",
+   "name": "LFO Trig Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lreset_src",
+   "name": "LFO Reset Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "egate_src",
+   "name": "Env Gate Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "etrig_src",
+   "name": "Env Trig Src",
+   "options": [
+    "Off",
+    "LFO 1",
+    "LFO 2",
+    "LFO 3",
+    "LFO 4",
+    "Tidal 1",
+    "Tidal 2",
+    "Tidal 3",
+    "Tidal 4",
+    "X1",
+    "X2",
+    "X3",
+    "Y",
+    "T1",
+    "T2",
+    "T3",
+    "Seq 1",
+    "Seq 2",
+    "Gate 1",
+    "Gate 2",
+    "Ext Osc",
+    "IZ Sine",
+    "IZ Tri",
+    "IZ Saw Up",
+    "IZ Saw Dn",
+    "IZ Pulse",
+    "IZ S+H",
+    "IZ Noise",
+    "Env +",
+    "Env -",
+    "VCO Saw",
+    "VCO Pulse",
+    "VCO Sub",
+    "Velocity",
+    "Mod Wheel",
+    "Pressure"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo1_wave",
+   "name": "LFO1 Wave",
+   "options": [
+    "Sine",
+    "Triangle",
+    "Ramp Up",
+    "Ramp Down",
+    "Square",
+    "Stepped"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo1_sync",
+   "name": "LFO1 Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 4,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo1_freq",
+   "name": "LFO1 Freq",
+   "min": -5.0,
+   "max": 8.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo1_slow",
+   "name": "LFO1 Slow",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "lfo1_sample",
+   "name": "LFO1 Sample",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo1_pw",
+   "name": "LFO1 PW",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo1_smooth",
+   "name": "LFO1 Smooth",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo1_offset",
+   "name": "LFO1 Offset",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo1_scale",
+   "name": "LFO1 Scale",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_wave",
+   "name": "LFO2 Wave",
+   "options": [
+    "Sine",
+    "Triangle",
+    "Ramp Up",
+    "Ramp Down",
+    "Square",
+    "Stepped"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo2_sync",
+   "name": "LFO2 Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 4,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo2_freq",
+   "name": "LFO2 Freq",
+   "min": -5.0,
+   "max": 8.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_slow",
+   "name": "LFO2 Slow",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "lfo2_sample",
+   "name": "LFO2 Sample",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_pw",
+   "name": "LFO2 PW",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_smooth",
+   "name": "LFO2 Smooth",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_offset",
+   "name": "LFO2 Offset",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo2_scale",
+   "name": "LFO2 Scale",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_wave",
+   "name": "LFO3 Wave",
+   "options": [
+    "Sine",
+    "Triangle",
+    "Ramp Up",
+    "Ramp Down",
+    "Square",
+    "Stepped"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo3_sync",
+   "name": "LFO3 Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 4,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo3_freq",
+   "name": "LFO3 Freq",
+   "min": -5.0,
+   "max": 8.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_slow",
+   "name": "LFO3 Slow",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "lfo3_sample",
+   "name": "LFO3 Sample",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_pw",
+   "name": "LFO3 PW",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_smooth",
+   "name": "LFO3 Smooth",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_offset",
+   "name": "LFO3 Offset",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo3_scale",
+   "name": "LFO3 Scale",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_wave",
+   "name": "LFO4 Wave",
+   "options": [
+    "Sine",
+    "Triangle",
+    "Ramp Up",
+    "Ramp Down",
+    "Square",
+    "Stepped"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo4_sync",
+   "name": "LFO4 Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 4,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "lfo4_freq",
+   "name": "LFO4 Freq",
+   "min": -5.0,
+   "max": 8.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_slow",
+   "name": "LFO4 Slow",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "lfo4_sample",
+   "name": "LFO4 Sample",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_pw",
+   "name": "LFO4 PW",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_smooth",
+   "name": "LFO4 Smooth",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_offset",
+   "name": "LFO4 Offset",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "lfo4_scale",
+   "name": "LFO4 Scale",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_freq",
+   "name": "Tidal Freq",
+   "min": -48.0,
+   "max": 48.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_shape",
+   "name": "Tidal Shape",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_slope",
+   "name": "Tidal Slope",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_smooth",
+   "name": "Tidal Smooth",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_shift",
+   "name": "Tidal Shift",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 1.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "td_range",
+   "name": "Tidal Range",
+   "options": [
+    "Low",
+    "Medium",
+    "High"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "td_output",
+   "name": "Tidal Output",
+   "options": [
+    "Gates",
+    "Amplitude",
+    "Slope/Phase",
+    "Frequency"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "td_ramp",
+   "name": "Tidal Ramp",
+   "options": [
+    "AD",
+    "Cycle",
+    "AR"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "td_sync",
+   "name": "Tidal Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_t_rate",
+   "name": "T Rate",
+   "min": -1.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_t_bias",
+   "name": "T Bias",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_t_jitter",
+   "name": "T Jitter",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_t_mode",
+   "name": "T Mode",
+   "options": [
+    "Coin Toss",
+    "Clusters",
+    "Drums"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_t_range",
+   "name": "T Range",
+   "options": [
+    "x1/4",
+    "x1",
+    "x4"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_deja_vu",
+   "name": "Deja Vu",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_length",
+   "name": "Length",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_t_dv",
+   "name": "T Deja Vu",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "mb_x_dv",
+   "name": "X Deja Vu",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "mb_x_spread",
+   "name": "X Spread",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_x_bias",
+   "name": "X Bias",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_x_steps",
+   "name": "X Steps",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "mb_x_mode",
+   "name": "X Mode",
+   "options": [
+    "Identical",
+    "Bump",
+    "Tilt"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_x_range",
+   "name": "X Range",
+   "options": [
+    "+2 V",
+    "+5 V",
+    "+/-5 V"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_x_scale",
+   "name": "X Scale",
+   "options": [
+    "Major",
+    "Minor",
+    "Pentatonic",
+    "Pelog",
+    "Bhairav",
+    "Shri"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_y_div",
+   "name": "Y Divider",
+   "options": [
+    "1/64",
+    "1/48",
+    "1/32",
+    "1/24",
+    "1/16",
+    "1/12",
+    "1/8",
+    "1/6",
+    "1/4",
+    "1/3",
+    "1/2",
+    "1/1"
+   ],
+   "default": 8,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "mb_sync",
+   "name": "Random Sync",
+   "options": [
+    "Free",
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "sq1_s1",
+   "name": "Seq1 Step 1",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s2",
+   "name": "Seq1 Step 2",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s3",
+   "name": "Seq1 Step 3",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s4",
+   "name": "Seq1 Step 4",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s5",
+   "name": "Seq1 Step 5",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s6",
+   "name": "Seq1 Step 6",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s7",
+   "name": "Seq1 Step 7",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s8",
+   "name": "Seq1 Step 8",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s9",
+   "name": "Seq1 Step 9",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s10",
+   "name": "Seq1 Step 10",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s11",
+   "name": "Seq1 Step 11",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s12",
+   "name": "Seq1 Step 12",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s13",
+   "name": "Seq1 Step 13",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s14",
+   "name": "Seq1 Step 14",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s15",
+   "name": "Seq1 Step 15",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_s16",
+   "name": "Seq1 Step 16",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq1_len",
+   "name": "Seq1 Length",
+   "min": 1,
+   "max": 16,
+   "default": 16,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "sq1_div",
+   "name": "Seq1 Rate",
+   "options": [
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 7,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "sq1_slew",
+   "name": "Seq1 Slew",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s1",
+   "name": "Seq2 Step 1",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s2",
+   "name": "Seq2 Step 2",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s3",
+   "name": "Seq2 Step 3",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s4",
+   "name": "Seq2 Step 4",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s5",
+   "name": "Seq2 Step 5",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s6",
+   "name": "Seq2 Step 6",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s7",
+   "name": "Seq2 Step 7",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s8",
+   "name": "Seq2 Step 8",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s9",
+   "name": "Seq2 Step 9",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s10",
+   "name": "Seq2 Step 10",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s11",
+   "name": "Seq2 Step 11",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s12",
+   "name": "Seq2 Step 12",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s13",
+   "name": "Seq2 Step 13",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s14",
+   "name": "Seq2 Step 14",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s15",
+   "name": "Seq2 Step 15",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_s16",
+   "name": "Seq2 Step 16",
+   "min": -5.0,
+   "max": 5.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "sq2_len",
+   "name": "Seq2 Length",
+   "min": 1,
+   "max": 16,
+   "default": 16,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "sq2_div",
+   "name": "Seq2 Rate",
+   "options": [
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 7,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "sq2_slew",
+   "name": "Seq2 Slew",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "gt1_g1",
+   "name": "Gate1 Step 1",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g2",
+   "name": "Gate1 Step 2",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g3",
+   "name": "Gate1 Step 3",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g4",
+   "name": "Gate1 Step 4",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g5",
+   "name": "Gate1 Step 5",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g6",
+   "name": "Gate1 Step 6",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g7",
+   "name": "Gate1 Step 7",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g8",
+   "name": "Gate1 Step 8",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g9",
+   "name": "Gate1 Step 9",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g10",
+   "name": "Gate1 Step 10",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g11",
+   "name": "Gate1 Step 11",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g12",
+   "name": "Gate1 Step 12",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g13",
+   "name": "Gate1 Step 13",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g14",
+   "name": "Gate1 Step 14",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g15",
+   "name": "Gate1 Step 15",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_g16",
+   "name": "Gate1 Step 16",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt1_len",
+   "name": "Gate1 Length",
+   "min": 1,
+   "max": 16,
+   "default": 16,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "gt1_div",
+   "name": "Gate1 Rate",
+   "options": [
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 7,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "gt1_width",
+   "name": "Gate1 Width",
+   "min": 0.05,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "gt2_g1",
+   "name": "Gate2 Step 1",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g2",
+   "name": "Gate2 Step 2",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g3",
+   "name": "Gate2 Step 3",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g4",
+   "name": "Gate2 Step 4",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g5",
+   "name": "Gate2 Step 5",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g6",
+   "name": "Gate2 Step 6",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g7",
+   "name": "Gate2 Step 7",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g8",
+   "name": "Gate2 Step 8",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g9",
+   "name": "Gate2 Step 9",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g10",
+   "name": "Gate2 Step 10",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g11",
+   "name": "Gate2 Step 11",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g12",
+   "name": "Gate2 Step 12",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g13",
+   "name": "Gate2 Step 13",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g14",
+   "name": "Gate2 Step 14",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g15",
+   "name": "Gate2 Step 15",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_g16",
+   "name": "Gate2 Step 16",
+   "options": [
+    "Off",
+    "On"
+   ],
+   "default": 0
+  },
+  {
+   "key": "gt2_len",
+   "name": "Gate2 Length",
+   "min": 1,
+   "max": 16,
+   "default": 16,
+   "dynamic_display": true,
+   "display": "int"
+  },
+  {
+   "key": "gt2_div",
+   "name": "Gate2 Rate",
+   "options": [
+    "8 Bars",
+    "4 Bars",
+    "2 Bars",
+    "1 Bar",
+    "1/2",
+    "1/4",
+    "1/8",
+    "1/16",
+    "1/32",
+    "1/2 T",
+    "1/4 T",
+    "1/8 T",
+    "1/16 T",
+    "1/2 .",
+    "1/4 .",
+    "1/8 ."
+   ],
+   "default": 7,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "gt2_width",
+   "name": "Gate2 Width",
+   "min": 0.05,
+   "max": 1.0,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "xo_wave",
+   "name": "Ext Osc Wave",
+   "options": [
+    "Saw",
+    "Square",
+    "Triangle",
+    "Sine",
+    "Noise"
+   ],
+   "default": 1,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "xo_oct",
+   "name": "Ext Osc Octave",
+   "options": [
+    "-3",
+    "-2",
+    "-1",
+    "0",
+    "+1",
+    "+2"
+   ],
+   "default": 2,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "xo_tune",
+   "name": "Ext Osc Tune",
+   "min": -12.0,
+   "max": 12.0,
+   "default": 0.0,
+   "dynamic_display": true
+  },
+  {
+   "key": "xo_pw",
+   "name": "Ext Osc Width",
+   "min": 0.05,
+   "max": 0.95,
+   "default": 0.5,
+   "dynamic_display": true
+  },
+  {
+   "key": "preset_slot",
+   "name": "Preset",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16"
+   ],
+   "default": 0,
+   "qlink_ticks": 3
+  },
+  {
+   "key": "preset_save",
+   "name": "Save Preset",
+   "min": 0.0,
+   "max": 1.0,
+   "momentary": true,
+   "type": "trigger",
+   "default": 0.0
+  },
+  {
+   "key": "preset_load",
+   "name": "Load Preset",
+   "min": 0.0,
+   "max": 1.0,
+   "momentary": true,
+   "type": "trigger",
+   "default": 0.0
+  },
+  {
+   "key": "preset_info",
+   "name": "Preset Status",
+   "min": 0.0,
+   "max": 1.0,
+   "default": 0.0,
+   "dynamic_display": true
   }
  ]
 }
