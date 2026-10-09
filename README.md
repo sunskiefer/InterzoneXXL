@@ -1,4 +1,4 @@
-# InterzoneXXL v0.1.0
+# InterzoneXXL v0.1.1
 
 **Valley Audio's Interzone synth voice, played from MIDI in mono or poly and patched with its own LFOs, random
 sources and sequencers, running natively inside MPC OS on the Akai Force.**
@@ -12,7 +12,7 @@ switches. On VCV Rack, Interzone comes alive through what is patched into its ja
 [PlateauXXL](https://github.com/sunskiefer/PlateauXXL), every input jack picks a source running inside the plugin.
 
 > [!NOTE]
-> **Status: 0.1.0, built and tested offline:** the plugin's output is compared, sample for sample, with Valley's own
+> **Status: 0.1.1, built and tested offline:** the plugin's output is compared, sample for sample, with Valley's own
 > Interzone module code fed the same notes and the same patch cables (x86, ASan + UBSan). **Not yet tested on a
 > device.** Report anything odd under [Issues](../../issues).
 
@@ -21,8 +21,10 @@ switches. On VCV Rack, Interzone comes alive through what is patched into its ja
 | ![VCO](docs/img/vco.png) | ![FILTER / LFO](docs/img/filter-lfo.png) |
 | ![MIXER / ENV](docs/img/mixer-env.png) | ![VOICE](docs/img/voice.png) |
 | ![CV IN](docs/img/cv-in.png) | ![CV IN sources](docs/img/cv-in-sources.png) |
+| ![EXT OSC](docs/img/ext-osc.png) | ![PRESETS](docs/img/presets.png) |
 | ![LFO](docs/img/lfo.png) | ![TIDAL](docs/img/tidal.png) |
 | ![RANDOM](docs/img/random.png) | ![SEQ](docs/img/seq.png) |
+| ![GATE](docs/img/gate.png) | ![SEQ SET](docs/img/seq-set.png) |
 
 *The pages, rendered offline from the skin (on the device MPC fills in the values).*
 

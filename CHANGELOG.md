@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+- PRESETS: SAVE and LOAD are big buttons with Titillium lettering, like PANIC (they were drawn at the size of the
+  framework's bitmap label).
+- Docs: the PRESETS, EXT OSC, GATE and SEQ SET pages in the README.
+
 ## 0.1.0
 - Interzone (Valley Audio) as an MPC OS VST2 instrument: VCO (glide, pitch mod, pulse width and PWM, octave, coarse
   continuous or semitone, fine), mixer (saw, pulse, sub with its octave and wave, white / pink noise, Ext), filter

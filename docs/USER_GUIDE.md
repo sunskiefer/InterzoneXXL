@@ -1,4 +1,4 @@
-# InterzoneXXL user guide (0.1.0)
+# InterzoneXXL user guide (0.1.1)
 
 ## A first patch
 On MIXER / ENV raise Ext: the Ext Osc adds a square an octave below the VCO. On SEQ, GATE 1, switch on a few

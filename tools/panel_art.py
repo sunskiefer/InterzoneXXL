@@ -12,7 +12,8 @@ For the Interzone pages (tools/panel.py):
     switches, and the Man. button with its red light;
   - the control's definition in TUI.json is replaced by one of its own: those images, the widget's exact bounds, and
     its live value text above it (sliders and small knobs; switches and detent knobs show their value on the panel).
-On the VOICE tab it redraws the knob filmstrip (r=44) with Valley's orange Rogan knob and draws the Panic button. Images the new definitions no longer use are deleted. Needs cairosvg and Pillow.
+On the VOICE tab it redraws the knob filmstrip (r=44) with Valley's orange Rogan knob and draws the Panic, Save and
+Load buttons. Images the new definitions no longer use are deleted. Needs cairosvg and Pillow.
 
 Filmstrips follow mpc-vst-plugins' device-checked layouts (docs/NOTES.md): a knob is 128 square frames with
 numFrames 127; a slider is frames of its own w x h, numFrames = their count, at most 12288 px tall. A switch, the
@@ -389,34 +390,42 @@ def section_box(d, x, y, w, h, title, font):
     d.text((x + w / 2, y), title, font=font, fill=(30, 30, 30), anchor="mm")
 
 
-PANIC_BOX = (1100 - 85, 530 - 32 - panel.Y_OFF, 170, 64)   # the VOICE page's Panic button (layout.py)
+# The VOICE tab's buttons (layout.py), drawn big with Titillium lettering: the framework sizes a button to its bitmap
+# label. key: (centre x, centre y in Force coordinates, w, h, label, fill, fill when pressed)
+BUTTONS = {
+    "panic": (1100, 530, 170, 64, "PANIC", (210, 58, 42), (240, 96, 80)),
+    "preset_save": (300, 510, 150, 64, "SAVE", (242, 154, 46), (250, 190, 120)),
+    "preset_load": (500, 510, 150, 64, "LOAD", (242, 154, 46), (250, 190, 120)),
+}
 
 
-def voice_panic(skin, tui):
-    """Panic as a big red button with Titillium lettering (the framework's is sized to its bitmap label)."""
-    x, y, w, h = PANIC_BOX
+def voice_buttons(skin, tui):
+    """The VOICE tab's buttons (Panic, preset Save and Load): big, with Titillium lettering, at their layout places."""
     font = ImageFont.truetype(FONT, 30)
-    found = False
-    for d in tui["pageData"]["componentDefinitions"]["localComponentDefinitions"]:
-        comps = d["value"].get("componentsData", [])
-        for comp in comps:
-            cd = comp["componentData"]
-            if cd["type"] == "Button" and "panic" in cd["data"].get("onImage", ""):
-                for name, fill in ((cd["data"]["offImage"], (210, 58, 42)), (cd["data"]["onImage"], (240, 96, 80))):
-                    img = Image.new("RGB", (w, h), panel.PANEL_RGB)
-                    dr = ImageDraw.Draw(img)
-                    dr.rounded_rectangle((0, 0, w - 1, h - 1), radius=8, fill=fill)
-                    dr.text((w / 2, h / 2), "PANIC", font=font, fill=(255, 255, 255), anchor="mm")
-                    img.save(os.path.join(skin, name), optimize=True)
-                for c2 in comps:
-                    set_bounds(c2, 0, 0, w, h)
-                found = d["key"]
-    if not found:
-        raise SystemExit("panel_art: the Panic button is not in TUI.json")
-    for d in tui["pageData"]["componentDefinitions"]["localComponentDefinitions"]:
-        for child in d["value"].get("componentsData", []):
-            if child["componentData"]["type"] == found:
-                set_bounds(child, x, y, w, h)
+    defs = tui["pageData"]["componentDefinitions"]["localComponentDefinitions"]
+    for key, (cx, cy, w, h, label, fill, fill_on) in BUTTONS.items():
+        found = None
+        for d in defs:
+            comps = d["value"].get("componentsData", [])
+            for comp in comps:
+                cd = comp["componentData"]
+                if cd["type"] == "Button" and cd["data"].get("onImage", "").startswith("sh_btn_%s_" % key):
+                    for name, colour in ((cd["data"]["offImage"], fill), (cd["data"]["onImage"], fill_on)):
+                        img = Image.new("RGB", (w, h), panel.PANEL_RGB)
+                        dr = ImageDraw.Draw(img)
+                        dr.rounded_rectangle((0, 0, w - 1, h - 1), radius=8, fill=colour)
+                        ink = (255, 255, 255) if key == "panic" else (17, 17, 17)
+                        dr.text((w / 2, h / 2), label, font=font, fill=ink, anchor="mm")
+                        img.save(os.path.join(skin, name), optimize=True)
+                    for c2 in comps:
+                        set_bounds(c2, 0, 0, w, h)
+                    found = d["key"]
+        if not found:
+            raise SystemExit("panel_art: the %s button is not in TUI.json" % key)
+        for d in defs:
+            for child in d["value"].get("componentsData", []):
+                if child["componentData"]["type"] == found:
+                    set_bounds(child, cx - w // 2, cy - h // 2 - panel.Y_OFF, w, h)
     json.dump(tui, open(os.path.join(skin, "TUI.json"), "w"), indent=1)
 
 
@@ -468,7 +477,7 @@ def main():
         bg.save(os.path.join(skin, "sh_bg_%d.png" % tab_index), optimize=True)
     tui = rewrite_tui(skin, controls, order)
     n_knobs = voice_knobs(skin)
-    voice_panic(skin, tui)
+    voice_buttons(skin, tui)
     check_overlaps(tui)
     removed = prune_images(skin, tui)
     print("panel_art: %d controls drawn on %d Interzone pages, %d VOICE knob strip(s), %d unused image(s) removed"
