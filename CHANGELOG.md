@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0
+## 0.1.0 (unreleased: waiting for the Force test)
 Milestone 1: the voice.
 - Interzone (Valley Audio) as an MPC OS VST2 instrument: VCO (glide, pitch mod, pulse width and PWM, octave, coarse
   continuous or semitone, fine), mixer (saw, pulse, sub with its octave and wave, white / pink noise, Ext), filter
