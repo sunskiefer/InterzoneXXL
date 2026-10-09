@@ -1,27 +1,30 @@
 # InterzoneXXL v0.1.0
 
-**Valley Audio's Interzone synth voice, played from MIDI in mono or poly, running natively inside MPC OS on the
-Akai Force.**
+**Valley Audio's Interzone synth voice, played from MIDI in mono or poly and patched with its own LFOs, random
+sources and sequencers, running natively inside MPC OS on the Akai Force.**
 
 InterzoneXXL is a VST2 instrument for MPC OS's built-in plugin host, made by L'Cronx (shown on the device as
 **InterzoneXXL** by **ANDREALPHEUS**). It is a port of **Interzone**, Dale Johnson's classic monosynth voice for VCV
 Rack: a VCO with glide, pitch modulation, pulse-width modulation and a sub wave, a mixer with noise, a resonant 2/4-pole
 OTA filter with a high-pass, an LFO with seven waves, a looping envelope and a VCA. The pages are the module's panel,
 drawn from Valley's own artwork, sliders where the module has sliders, knobs where it has knobs, switches where it has
-switches.
+switches. On VCV Rack, Interzone comes alive through what is patched into its jacks; a Force has no cables, so, as in
+[PlateauXXL](https://github.com/sunskiefer/PlateauXXL), every input jack picks a source running inside the plugin.
 
 > [!NOTE]
-> **Status: 0.1.0, milestone 1 (the voice).** Built and tested offline: the plugin's output is compared, sample for
-> sample, with Valley's own Interzone module code fed the same notes (x86, ASan + UBSan). **Not yet tested on a
-> device.** The module's CV inputs get built-in sources (patching, gate/CV sequencers, as in
-> [PlateauXXL](https://github.com/sunskiefer/PlateauXXL)) in the next milestones: see the [Roadmap](ROADMAP.md).
+> **Status: 0.1.0, built and tested offline:** the plugin's output is compared, sample for sample, with Valley's own
+> Interzone module code fed the same notes and the same patch cables (x86, ASan + UBSan). **Not yet tested on a
+> device.** Report anything odd under [Issues](../../issues).
 
 | | |
 | --- | --- |
 | ![VCO](docs/img/vco.png) | ![FILTER / LFO](docs/img/filter-lfo.png) |
 | ![MIXER / ENV](docs/img/mixer-env.png) | ![VOICE](docs/img/voice.png) |
+| ![CV IN](docs/img/cv-in.png) | ![CV IN sources](docs/img/cv-in-sources.png) |
+| ![LFO](docs/img/lfo.png) | ![TIDAL](docs/img/tidal.png) |
+| ![RANDOM](docs/img/random.png) | ![SEQ](docs/img/seq.png) |
 
-*The pages, rendered offline from the skin (on the device MPC fills in the values above the sliders).*
+*The pages, rendered offline from the skin (on the device MPC fills in the values).*
 
 ## Highlights
 
@@ -31,10 +34,24 @@ switches.
   Retrigger. Poly is Interzone's own polyphony (its DSP runs four voices per SIMD group) with 1 to 16 voices, the
   oldest note stolen when they are all busy. Pitch bend (0-24 semitones) and the sustain pedal work in both.
 - **The module's panel:** VCO, FILTER / LFO and MIXER / ENV pages, each a piece of Interzone's dark panel with
-  Valley's sliders, Rogan knobs and VCV's switches; values above the sliders.
-- **VOICE page:** voice mode, poly voices, mono retrigger, bend range, output level, and RMXXXL's brickwall limiter
-  (Drive, Ceiling, Release). **Panic:** one tap back to the defaults, every note off.
-- **Q-Links:** every control on a Q-Link, the panel read left to right (bank 1 = Q-Links 1-8, bank 2 = 9-16).
+  Valley's sliders, Rogan knobs and VCV's switches at the module's own positions; values above the sliders.
+- **Every input jack patched:** VOct 2, PWM, Mixer Ext, Filter Freq 1 and 2 (with the module's blue
+  attenuverters), Res, VCA Level (with its attenuverter), LFO Rate, Trig and Reset, Env Gate and Trig each pick a
+  source and have an amount, on the **CV IN** page, as if a cable were plugged in.
+- **The sources (PlateauXXL's):** four **Bogaudio LFOs**, **Tidal Modulator 2** (Mutable Tides 2), **Random
+  Sampler** (Mutable Marbles), two 16-step **CV sequencers** and two 16-step **gate sequencers**, locked to the MPC
+  tempo if you like; plus Interzone's own output jacks (its LFO's seven waves, the envelope + and -, the VCO's saw,
+  pulse and sub, per voice in Poly), MIDI velocity, mod wheel and pressure.
+- **Ext Osc:** a simple oscillator per voice that follows the played note (saw, square, triangle, sine or noise,
+  -3 to +2 octaves, tune, width); it feeds Mixer Ext by default, so the Ext slider is a second oscillator or a
+  sub. Patch it anywhere else too.
+- **A gate sequencer plays the voice:** Env Gate's source gates the envelope even with no key down, Env Trig's
+  retriggers held notes, Seq 1 / 2 into VOct 2 transposes: an internal sequenced synth.
+- **VOICE page:** voice mode, poly voices, mono retrigger, bend range, output level, RMXXXL's brickwall limiter
+  (Drive, Ceiling, Release) and **Panic** (one tap back to the defaults, every note off). **EXT OSC** and
+  **PRESETS** (16 slots of your own) on the same tab.
+- **Q-Links:** every control on a Q-Link (the Interzone pages read left to right, bank 1 = Q-Links 1-8,
+  bank 2 = 9-16).
 - **Sample-accurate notes:** sequenced notes start at their exact position in the audio block.
 
 ## Requirements
@@ -58,6 +75,8 @@ ssh -t root@<device-ip> sh /tmp/InterzoneXXL-<version>/install.sh
 The installer asks for confirmation (`-y` skips it), **stops MPC** (save your project first), copies the plugin to
 `/sdcard/Synths/ANDREALPHEUS - VST - InterzoneXXL/`, backs up and edits `MPC.settings`, and starts MPC again. Then
 load **InterzoneXXL** (manufacturer ANDREALPHEUS) as a plugin instrument on a track. `uninstall.sh` removes it.
+Presets go in `/sdcard/InterzoneXXL Presets` (created on the first save), outside the plugin folder, so they
+survive updates.
 
 ## Building
 
@@ -75,15 +94,18 @@ tools/device_bench.sh <device-ip>   # CPU on the device, Mono and Poly 16 (nothi
 - `tools/gen_params.py` is the single source of the parameter list (`params.json`, `src/param_ids.h`). MPC stores
   automation by parameter index, so parameters are appended only.
 - `tools/panel.py` places every control where the module has it; `tools/layout.py` writes `layout.conf` from it, and
-  `tools/panel_art.py` draws the skin from Valley's and VCV's artwork (`art/`).
+  `tools/panel_art.py` draws the Interzone pages from Valley's and VCV's artwork (`art/`). The source pages come
+  from PlateauXXL (`tools/source_pages.py`, `tools/knob_art.py`, `tools/post_skin.py`).
 
 ## Related projects
 
 - [mpc-vst-plugins](https://github.com/sd88me/mpc-vst-plugins) by sd88me: the framework InterzoneXXL is built on,
   and the plugin catalog.
 - [PlateauXXL](https://github.com/sunskiefer/PlateauXXL) and [RMXXXL](https://github.com/sunskiefer/RMXXXL) by the
-  same author: the build, the limiter, Panic and the Q-Link handling come from them.
-- [ValleyRackFree](https://github.com/ValleyAudio/ValleyRackFree): the VCV Rack module InterzoneXXL ports.
+  same author: the patching, the sources and sequencers, the presets, the limiter, Panic and the Q-Link handling come
+  from them.
+- [ValleyRackFree](https://github.com/ValleyAudio/ValleyRackFree), [BogaudioModules](https://github.com/bogaudio/BogaudioModules)
+  and [Audible Instruments](https://github.com/VCVRack/AudibleInstruments): the VCV Rack modules InterzoneXXL ports.
 
 ## License
 
@@ -100,12 +122,19 @@ graphics (CC BY-NC 4.0), so InterzoneXXL is free and must not be sold.
 - **VCV Rack's SIMD and DSP headers:** VCV (GPL-3.0-or-later), unchanged in `third_party/rack`
   ([VENDORED.md](third_party/rack/VENDORED.md)).
 - **SIMDe:** Evan Nemerson and contributors (MIT), the SSE-on-NEON layer Rack uses on ARM, in `third_party/simde`.
-- **Brickwall limiter, Panic, Q-Link handling:** from [RMXXXL](https://github.com/sunskiefer/RMXXXL) and
-  [PlateauXXL](https://github.com/sunskiefer/PlateauXXL) by L'Cronx (GPL-3.0-or-later).
+- **LFO:** Matt Demanett, [Bogaudio](https://github.com/bogaudio/BogaudioModules) (GPL-3.0-or-later), vendored
+  unchanged in `third_party/bogaudio`.
+- **Tidal Modulator 2 and Random Sampler:** Emilie Gillet, Mutable Instruments Tides 2 and Marbles (MIT), from VCV's
+  fork of the eurorack code, in `third_party/mutable`; the module glue follows VCV Audible Instruments
+  (GPL-3.0-or-later).
+- **Patching, sources, sequencers, presets, brickwall limiter, Panic, Q-Link handling:** from
+  [PlateauXXL](https://github.com/sunskiefer/PlateauXXL) and [RMXXXL](https://github.com/sunskiefer/RMXXXL) by
+  L'Cronx (GPL-3.0-or-later).
 - **VST2 wrapper, skin generator, installer:** sd88me ([mpc-vst-plugins](https://github.com/sd88me/mpc-vst-plugins))
   (MIT), as a submodule in `third_party/mpc-vst-plugins`.
-- **Artwork** (`art/`): Interzone's panel, Valley's sliders and Rogan knobs (ValleyRackFree), VCV's switches (VCV
-  Component Library, CC BY-NC 4.0); see [art/README.md](art/README.md).
+- **Artwork** (`art/`): Interzone's panel, Valley's sliders and Rogan knobs (ValleyRackFree), VCV's switches and
+  Rogan knobs (VCV Component Library, CC BY-NC 4.0), Bogaudio's knobs (CC BY-SA 4.0); see [art/README.md](art/README.md).
 - **Interface font:** [Titillium Web](https://fonts.google.com/specimen/Titillium+Web), SIL Open Font License 1.1.
 
-InterzoneXXL is not affiliated with or endorsed by Valley Audio, VCV or Akai Professional.
+InterzoneXXL is not affiliated with or endorsed by Valley Audio, Bogaudio, Mutable Instruments, VCV or Akai
+Professional.
