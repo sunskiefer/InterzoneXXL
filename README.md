@@ -12,9 +12,9 @@ switches. On VCV Rack, Interzone comes alive through what is patched into its ja
 [PlateauXXL](https://github.com/sunskiefer/PlateauXXL), every input jack picks a source running inside the plugin.
 
 > [!NOTE]
-> **Status: 0.1.1, built and tested offline:** the plugin's output is compared, sample for sample, with Valley's own
-> Interzone module code fed the same notes and the same patch cables (x86, ASan + UBSan). **Not yet tested on a
-> device.** Report anything odd under [Issues](../../issues).
+> **Status: 0.1.1, tested on an Akai Force** (MPC OS 3.9.1 with MockbaMod). Offline, the plugin's output is also
+> compared, sample for sample, with Valley's own Interzone module code fed the same notes and the same patch cables
+> (x86, ASan + UBSan). Report anything odd under [Issues](../../issues).
 
 | | |
 | --- | --- |
