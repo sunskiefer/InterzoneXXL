@@ -50,12 +50,13 @@ jobs:
       - name: Package
         run: |
           VERSION="${{ steps.ver.outputs.version }}"
+          python3 tools/release_quotes.py third_party/mpc-vst-plugins
           python3 third_party/mpc-vst-plugins/tools/release.py \
             --so build/arm/interzonexxl.so \
-            --skin "build/skin/ANDREALPHEUS - VST - InterzoneXXL" \
+            --skin "build/skin/L'Cronx - VST - InterzoneXXL" \
             --entry build/pluginlist-entry.xml \
             --version "$VERSION" \
-            --about "InterzoneXXL by ANDREALPHEUS: Valley Audio's Interzone synth voice for MPC OS" \
+            --about "InterzoneXXL by L'Cronx: Valley Audio's Interzone synth voice for MPC OS" \
             --id interzonexxl --repo sunskiefer/InterzoneXXL --license GPL-3.0-or-later \
             -o dist
 

@@ -6,7 +6,7 @@ steps; on CV IN, CV 2, set ENV GATE to Gate 1; press play: the voice plays the g
 turn some SEQ 1 steps: it plays a melody.
 
 ## Load it
-After installing (README), on a track choose a plugin instrument: **InterzoneXXL** by ANDREALPHEUS. Play it from
+After installing (README), on a track choose a plugin instrument: **InterzoneXXL** by L'Cronx. Play it from
 the pads, a MIDI keyboard or a sequence. It starts in **Mono** with the module's defaults: a saw, the filter open,
 the envelope at A 0 / D 0 / S 100 % / R 0.
 

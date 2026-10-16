@@ -4,7 +4,7 @@
 sources and sequencers, running natively inside MPC OS on the Akai Force.**
 
 InterzoneXXL is a VST2 instrument for MPC OS's built-in plugin host, made by L'Cronx (shown on the device as
-**InterzoneXXL** by **ANDREALPHEUS**). It is a port of **Interzone**, Dale Johnson's classic monosynth voice for VCV
+**InterzoneXXL** by **L'Cronx**). It is a port of **Interzone**, Dale Johnson's classic monosynth voice for VCV
 Rack: a VCO with glide, pitch modulation, pulse-width modulation and a sub wave, a mixer with noise, a resonant 2/4-pole
 OTA filter with a high-pass, an LFO with seven waves, a looping envelope and a VCA. The pages are the module's panel,
 drawn from Valley's own artwork, sliders where the module has sliders, knobs where it has knobs, switches where it has
@@ -75,8 +75,8 @@ ssh -t root@<device-ip> sh /tmp/InterzoneXXL-<version>/install.sh
 ```
 
 The installer asks for confirmation (`-y` skips it), **stops MPC** (save your project first), copies the plugin to
-`/sdcard/Synths/ANDREALPHEUS - VST - InterzoneXXL/`, backs up and edits `MPC.settings`, and starts MPC again. Then
-load **InterzoneXXL** (manufacturer ANDREALPHEUS) as a plugin instrument on a track. `uninstall.sh` removes it.
+`/sdcard/Synths/L'Cronx - VST - InterzoneXXL/`, backs up and edits `MPC.settings`, and starts MPC again. Then
+load **InterzoneXXL** (manufacturer L'Cronx) as a plugin instrument on a track. `uninstall.sh` removes it.
 Presets go in `/sdcard/InterzoneXXL Presets` (created on the first save), outside the plugin folder, so they
 survive updates.
 

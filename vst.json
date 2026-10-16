@@ -1,8 +1,8 @@
 {
   "name": "InterzoneXXL",
-  "vendor": "ANDREALPHEUS",
+  "vendor": "L'Cronx",
   "uid": "AnIz",
-  "version": 1001,
+  "version": 1002,
   "so": "interzonexxl.so",
   "params": "params.json",
   "build": {
