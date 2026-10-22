@@ -1,4 +1,4 @@
-> **0.1.2** is 0.1.1 packed under L'Cronx (plugin folder `L'Cronx - VST - InterzoneXXL`); nothing else changed. Uninstall 0.1.1 first.
+> **0.1.3** is 0.1.2 built on the latest wrapper and includes the Q-Link and automation fix (#486–#489): Q-Links now move parameters on the track's automation screen. Nothing else changed. Installs over 0.1.2 in place.
 
 **InterzoneXXL — Valley Audio's Interzone synth voice, played from MIDI in mono or poly and patched with its own LFOs, random sources and sequencers, running natively inside MPC OS on the Akai Force.**
 

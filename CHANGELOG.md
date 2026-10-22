@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3
+- Built on the latest wrapper and includes the Q-Link and automation fix (mpc-vst-plugins #486-#489): Q-Links now
+  move this plugin's parameters on the track's automation screen (MPC no longer rebuilds its parameter screen on every
+  write, at most one refresh per 50 ms), and the build keeps every parameter's index fixed (`params.lock`), so saved
+  projects, automation and Q-Link maps stay on the right parameters in later versions. Nothing else changed.
+- Packaged with the fixed L'Cronx release tools (the ' in the plugin folder name is escaped in install.sh and
+  uninstall.sh, and the catalog check no longer flags it). Installs over 0.1.2 in place: no need to uninstall first.
+
 ## 0.1.2
 - Packed under **L'Cronx**: the plugin folder is now `L'Cronx - VST - InterzoneXXL` and MPC lists the maker as L'Cronx. Nothing else
   changed from 0.1.1. If you installed 0.1.1, run its `uninstall.sh` first (copy out anything you saved inside the plugin
